@@ -97,7 +97,7 @@ namespace lab1.ex2._2 {
         }
 
         private static void SaveData(string lastName, string city, int age) {
-
+            //Добавление новых данных в файл
             File.AppendAllText(pathCsvFile, $"{lastName},{city},{age}\n");
             #region linqToCsv
             //var userList = new List<User>{
@@ -154,10 +154,11 @@ namespace lab1.ex2._2 {
             //    }
             //}
             #endregion
-
+            //Чтение файла
             var lines = File.ReadAllLines(pathCsvFile);
             var users = new List<User>();
 
+            //Получение данных из файла
             foreach (var line in lines) {
 
                 var values = line.Split(',');
@@ -173,6 +174,7 @@ namespace lab1.ex2._2 {
             int sumAge = 0;
             int count = 0;
 
+            //Добавление результата в лист
             foreach (var user in users) {
                 if(user.City == city){
                     ResultListBox.Items.Add("Фамилия:" + user.LastName + "\tВозраст:" + user.Age);
@@ -180,13 +182,14 @@ namespace lab1.ex2._2 {
                     count++;
                 }    
             }
+            //Вывод при выявлении жителей в этом городе
             if(count > 0) {
                 MessageBox.Show($"Средний возраст жителей этого города равен:{Math.Round((decimal)sumAge / count, 0)}");
             }
-            
         }
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e) {
+            //генерация случайных данных с библиотеки
             SaveData(Faker.Name.Last(), Faker.Address.City(), Faker.RandomNumber.Next(1, 100));
         }
     }
