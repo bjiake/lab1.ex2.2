@@ -48,6 +48,10 @@ namespace lab1.ex2._2 {
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if(!File.Exists(pathCsvFile)) {
+                File.Create(pathCsvFile);
+            }
+            
             //Проверка на пустые занчения
             if (String.IsNullOrEmpty(userLastName.Text) || String.IsNullOrEmpty(userAge.Text) || String.IsNullOrEmpty(userCity.Text)) {
                 MessageBox.Show(@" Ошибка: Введите данные");
@@ -98,6 +102,10 @@ namespace lab1.ex2._2 {
 
         private static void SaveData(string lastName, string city, int age) {
             //Добавление новых данных в файл
+            if (!File.Exists(pathCsvFile)) {
+                File.Create(pathCsvFile);
+            }
+
             File.AppendAllText(pathCsvFile, $"{lastName},{city},{age}\n");
             #region linqToCsv
             //var userList = new List<User>{
@@ -154,6 +162,12 @@ namespace lab1.ex2._2 {
             //    }
             //}
             #endregion
+
+            if (!File.Exists(pathCsvFile)) {
+                File.Create(pathCsvFile);
+                MessageBox.Show("Данные не были найдены");
+            }
+
             //Чтение файла
             var lines = File.ReadAllLines(pathCsvFile);
             var users = new List<User>();
@@ -191,6 +205,10 @@ namespace lab1.ex2._2 {
         private void GenerateButton_Click(object sender, RoutedEventArgs e) {
             //генерация случайных данных с библиотеки
             SaveData(Faker.Name.Last(), Faker.Address.City(), Faker.RandomNumber.Next(1, 100));
+        }
+
+        private void CityLoad_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            CheckInput.ChechInputWord(e);
         }
     }
     [Serializable]

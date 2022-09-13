@@ -9,15 +9,13 @@ namespace lab1.ex2._2 {
     internal class CheckInput {
         //Защита от дурака
         public static void ChechInputWord(TextCompositionEventArgs e) {
-            foreach (char c in e.Text)
-            {
+            foreach (char c in e.Text) {
                 if (
                     c < 'A' || c > 'Z' &&
                     c < 'a' || c > 'z' &&
                     c < 'А' || c > 'Я' &&
                     c < 'а' || c > 'я'
-                    )
-                {
+                   ) {
                     e.Handled = true;
                     break;
                 }
