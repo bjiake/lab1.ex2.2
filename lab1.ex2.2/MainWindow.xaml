@@ -10,13 +10,13 @@
         <Label Content="Фамилия" HorizontalAlignment="Left" Margin="34,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.478,-1.668"/>
         <Label Content="Город проживания" HorizontalAlignment="Left" Margin="34,55,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.478,-1.668"/>
         <Label Content="Возраст" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.478,-1.668"/>
-        <TextBox x:Name="userCity" HorizontalAlignment="Left" Margin="155,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="userCity_PreviewTextInput"/>
-        <TextBox x:Name="userLastName" HorizontalAlignment="Left" Margin="155,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput ="userLastName_PreviewTextInput"/>
-        <TextBox x:Name="userAge" HorizontalAlignment="Left" Margin="155,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="userAge_PreviewTextInput"/>
+        <TextBox x:Name="userCity" HorizontalAlignment="Left" Margin="155,59,0,0"  TextWrapping="NoWrap" AcceptsReturn="False"  Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="userCity_PreviewTextInput"/>
+        <TextBox x:Name="userLastName" HorizontalAlignment="Left" Margin="155,28,0,0"  TextWrapping="NoWrap" AcceptsReturn="False"  Text="" VerticalAlignment="Top" Width="120" PreviewTextInput ="userLastName_PreviewTextInput"/>
+        <TextBox x:Name="userAge" HorizontalAlignment="Left" Margin="155,90,0,0"  TextWrapping="NoWrap" AcceptsReturn="False"  Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="userAge_PreviewTextInput"/>
         <Button x:Name="SaveButton" Content="Сохранить данные" HorizontalAlignment="Left" Margin="34,128,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.172,-1.416" Width="124" Click="SaveButton_Click"/>
         <Button x:Name="LoadButton" Content="Вывести данные" HorizontalAlignment="Left" Margin="34,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.172,-1.416" Width="124" Click="LoadButton_Click"/>
         <Label Content="Город проживания" HorizontalAlignment="Left" Margin="343,24,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="CityLoad" HorizontalAlignment="Left" Margin="464,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" PreviewTextInput="CityLoad_PreviewTextInput"/>
+        <TextBox x:Name="CityLoad" HorizontalAlignment="Left" Margin="464,28,0,0" TextWrapping="NoWrap" AcceptsReturn="False"  Text="" VerticalAlignment="Top" Width="205" PreviewTextInput="CityLoad_PreviewTextInput"/>
         <ListBox x:Name="ResultListBox" Margin="343,60,39,26"/>
         <Button x:Name="GenerateButton" Content="Генерация данных" HorizontalAlignment="Left" Margin="34,178,0,0" VerticalAlignment="Top" Width="124" Click="GenerateButton_Click"/>
 

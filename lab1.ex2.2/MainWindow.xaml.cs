@@ -32,12 +32,12 @@ namespace lab1.ex2._2 {
 
         //Ввод только букв
         private void userLastName_PreviewTextInput(object sender, TextCompositionEventArgs e) {
-            CheckInput.ChechInputWord(e);
+            CheckInput.ChechInputWordLastName(e, sender);
         }
 
         //Ввод только букв
         private void userCity_PreviewTextInput(object sender, TextCompositionEventArgs e) {
-             CheckInput.ChechInputWord(e);
+             CheckInput.ChechInputWordCity(e, sender);
         }
 
         //Ввод только чисел
@@ -128,22 +128,17 @@ namespace lab1.ex2._2 {
 
         private void LoadButton_Click(object sender, RoutedEventArgs e) {
             #region Проверка на пустые занчения
-            if (String.IsNullOrEmpty(CityLoad.Text)) {
-                MessageBox.Show(@" Ошибка: Введите данные");
-                return;
-            }
-            string city = CityLoad.Text.Trim();
 
-            if (city.Length < 3)
-            {
-                CityLoad.ToolTip = "Это поле введено не корректно!";
-                CityLoad.Background = Brushes.DarkRed;
-            }
-            else
-            {
-                userCity.ToolTip = null;
-                userCity.Background = Brushes.Transparent;
-            }
+            //if (city.Length < 3)
+            //{
+            //    CityLoad.ToolTip = "Это поле введено не корректно!";
+            //    CityLoad.Background = Brushes.DarkRed;
+            //}
+            //else
+            //{
+            //    userCity.ToolTip = null;
+            //    userCity.Background = Brushes.Transparent;
+            //}
             #endregion
             #region linqToCsv
             //var csvFileDescrition = new CsvFileDescription {
@@ -166,11 +161,14 @@ namespace lab1.ex2._2 {
             if (!File.Exists(pathCsvFile)) {
                 File.Create(pathCsvFile);
                 MessageBox.Show("Данные не были найдены");
+                return;
             }
+
+            
 
             //Чтение файла
             var lines = File.ReadAllLines(pathCsvFile);
-            var users = new List<User>();
+            var users = new List<User>();   
 
             //Получение данных из файла
             foreach (var line in lines) {
@@ -188,17 +186,33 @@ namespace lab1.ex2._2 {
             int sumAge = 0;
             int count = 0;
 
-            //Добавление результата в лист
-            foreach (var user in users) {
-                if(user.City == city){
-                    ResultListBox.Items.Add("Фамилия:" + user.LastName + "\tВозраст:" + user.Age);
+            string city = CityLoad.Text.Trim();
+
+            if (String.IsNullOrEmpty(CityLoad.Text)) {
+                //Добавление результата в лист
+                foreach (var user in users) {
+                    ResultListBox.Items.Add("Фамилия: " + user.LastName + "\nГород: " + user.City + "\nВозраст:" + user.Age);
                     sumAge += user.Age;
                     count++;
-                }    
-            }
-            //Вывод при выявлении жителей в этом городе
-            if(count > 0) {
-                MessageBox.Show($"Средний возраст жителей этого города равен:{Math.Round((decimal)sumAge / count, 0)}");
+                }
+                if(count > 0) {
+                    MessageBox.Show($"Средний возраст жителей всех городов равен: {Math.Round((decimal)sumAge / count, 0)}");
+                }
+            } else {
+                //Добавление результата в лист
+                foreach (var user in users) {
+                    if (user.City == city) {
+                        ResultListBox.Items.Add("Фамилия: " + user.LastName + "\nВозраст:" + user.Age);
+                        sumAge += user.Age;
+                        count++;
+                    }
+                }
+                //Вывод при выявлении жителей в этом городе
+                if (count > 0) {
+                    MessageBox.Show($"Средний возраст жителей этого города равен: {Math.Round((decimal)sumAge / count, 0)}");
+                } else {
+                    MessageBox.Show($"Жители не найдены");
+                }
             }
         }
 
@@ -208,7 +222,7 @@ namespace lab1.ex2._2 {
         }
 
         private void CityLoad_PreviewTextInput(object sender, TextCompositionEventArgs e) {
-            CheckInput.ChechInputWord(e);
+            CheckInput.ChechInputWordCity(e, sender);
         }
     }
     [Serializable]
